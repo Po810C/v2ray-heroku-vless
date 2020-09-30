@@ -26,8 +26,6 @@
 
 WebSocket 路径为 `/cgi-bin/api/`。
 
-`alterId` 为 `64`。
-
 V2Ray 将在部署时自动安装最新版本。
 
 **出于安全考量，除非使用 CDN，否则请不要使用自定义域名，而使用 Heroku 分配的二级域名，以实现 V2Ray Websocket + TLS。**
