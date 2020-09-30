@@ -19,20 +19,17 @@ cat << EOF > /usr/local/etc/v2ray/config.json
             "port": $PORT,
             "protocol": "vless",
             "settings": {
+                "decryption": "none",
                 "clients": [
                     {
-                        "id": "$UUID",
-                        "level": 0
+                        "id": "$UUID"
                     }
                 ],
-                "decryption": "none"
             },
             "streamSettings": {
                 "network": "ws",
-                "security": "none",
                 "wsSettings": {
-                    "acceptProxyProtocol": true, // 提醒：若你用 Nginx/Caddy 等反代 WS，需要删掉这行
-                    "path": "/cgi-bin/api/" // 必须换成自定义的 PATH，需要和分流的一致
+                    "path": "/cgi-bin/api/"
                 }
         }
     ],
