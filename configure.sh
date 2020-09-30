@@ -25,7 +25,6 @@ cat << EOF > /usr/local/etc/v2fly/config.json
                     }
                 ],
                 "decryption": "none"
-                "disableInsecureEncryption": true
             },
             "streamSettings": {
                 "network": "ws",
