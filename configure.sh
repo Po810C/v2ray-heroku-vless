@@ -21,7 +21,8 @@ cat << EOF > /usr/local/etc/v2fly/config.json
             "settings": {
                 "clients": [
                     {
-                        "id": "$UUID"
+                        "id": "$UUID",
+                        "level": 0
                     }
                 ],
                 "decryption": "none"
