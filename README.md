@@ -24,7 +24,7 @@
 
 ## 注意
 
-WebSocket 路径为 `/cgi-bin/api/`。
+WebSocket 路径为 `/`。
 
 V2Ray 将在部署时自动安装最新版本。
 
