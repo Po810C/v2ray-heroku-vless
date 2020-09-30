@@ -1,35 +1,39 @@
 #!/bin/sh
 
-# Download and install V2Ray
-mkdir /tmp/v2ray
-curl -L -H "Cache-Control: no-cache" -o /tmp/v2ray/v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
-unzip /tmp/v2ray/v2ray.zip -d /tmp/v2ray
-install -m 755 /tmp/v2ray/v2ray /usr/local/bin/v2ray
-install -m 755 /tmp/v2ray/v2ctl /usr/local/bin/v2ctl
+# Download and install V2Fly
+mkdir /tmp/v2fly
+curl -L -H "Cache-Control: no-cache" -o /tmp/v2fly/v2fly.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
+unzip /tmp/v2fly/v2fly.zip -d /tmp/v2fly
+install -m 755 /tmp/v2fly/v2ray /usr/local/bin/v2fly
+install -m 755 /tmp/v2fly/v2ctl /usr/local/bin/v2flyctl
 
 # Remove temporary directory
-rm -rf /tmp/v2ray
+rm -rf /tmp/v2fly
 
-# V2Ray new configuration
-install -d /usr/local/etc/v2ray
-cat << EOF > /usr/local/etc/v2ray/config.json
+# V2Fly new configuration
+install -d /usr/local/etc/v2fly
+cat << EOF > /usr/local/etc/v2fly/config.json
 {
     "inbounds": [
         {
             "port": $PORT,
-            "protocol": "vmess",
+            "protocol": "vless",
             "settings": {
                 "clients": [
                     {
-                        "id": "$UUID",
-                        "alterId": 64
+                        "id": "$UUID"
                     }
                 ],
+                "decryption": "none"
                 "disableInsecureEncryption": true
             },
             "streamSettings": {
-                "network": "ws"
-            }
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "acceptProxyProtocol": true, // 提醒：若你用 Nginx/Caddy 等反代 WS，需要删掉这行
+                    "path": "/cgi-bin/api/" // 必须换成自定义的 PATH，需要和分流的一致
+                }
         }
     ],
     "outbounds": [
@@ -40,5 +44,5 @@ cat << EOF > /usr/local/etc/v2ray/config.json
 }
 EOF
 
-# Run V2Ray
-/usr/local/bin/v2ray -config /usr/local/etc/v2ray/config.json
+# Run V2Fly
+/usr/local/bin/v2fly -config /usr/local/etc/v2fly/config.json
