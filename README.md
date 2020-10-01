@@ -20,11 +20,15 @@
 
 ### UUID
 
+`PORT` > `一个 PORT，供用户连接使用`。
+
 `UUID` > `一个 UUID，供用户连接时验证身份使用`。
+
+`V2_WS_PATH_VLESS` > `一个 WS PATH，供用户连接时验证身份使用`。
 
 ## 注意
 
-WebSocket 路径为 `/`。
+WebSocket 默认路径为 `/cgi-bin/api/`。
 
 V2Ray 将在部署时自动安装最新版本。
 
